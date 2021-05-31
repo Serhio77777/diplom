@@ -20,7 +20,11 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  "types": ["@emotion/react/types/css-prop"],
   "include": [
-    "src"
-  ]
+    "src",
+    "public",
+    "./src/types.d.ts"
+  ],
+  "exclude": ["node_modules", "build", "dist", "src/**/*.js", "src/**/*.jsx"]
 }
