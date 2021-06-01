@@ -311,9 +311,9 @@ const IconButton = styled.img<{ isExit?: boolean }>`
   border-radius: 15px;
   position: absolute;
   right: 20px;
-  top: ${({ isExit }) => isExit ? '20px' : '15px'};
+  top: ${({ isExit }) => !isExit ? '20px' : '15px'};
   background: white;
-  padding: ${({ isExit }) => isExit ? '5px' : '9px'};
+  padding: ${({ isExit }) => !isExit ? '5px' : '9px'};
   cursor: pointer;
   z-index: 1;
 `;
