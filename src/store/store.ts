@@ -4,6 +4,7 @@ import { stringify, parse } from 'flatted';
 import storage from 'redux-persist/lib/storage'; 
 import { persistStore, persistCombineReducers, createTransform } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { controlReducer } from './control/reducer';
 
@@ -24,7 +25,7 @@ const rootReducer = persistCombineReducers(persistConfig, {
 	routing: routerReducer
 });
 const store = createStore(
-	rootReducer
+	rootReducer, composeWithDevTools()
 );
 
 persistStore(store);
