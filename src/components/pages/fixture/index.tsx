@@ -4,7 +4,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three-orbitcontrols-ts';
 import {Link} from 'react-router-dom'
 import styled from 'styled-components';
-import Sidebar from "react-sidebar";
 
 import { ICurrentModel, IModel } from '../../../store/control/types';
 
@@ -72,6 +71,7 @@ const Fixture = (props: Props): React.ReactElement => {
     // renderer.render(scene, camera);
   
     const renderer: any = new THREE.WebGLRenderer({canvas, antialias: true});
+    renderer.autoClear = true;
 
     renderer.shadowMap.enabled = true;
     renderer.setPixelRatio(window.devicePixelRatio); 
@@ -203,6 +203,14 @@ const Fixture = (props: Props): React.ReactElement => {
   const selectOption = (e: any) => {
     // setActiveOption(e.target.dataset.option);
   }
+  const [xPosition, setX] = React.useState(300);
+  const toggleMenu = () => {
+    if (xPosition > 0) {
+      setX(0);
+    } else {
+      setX(300);
+    }
+  };
 
   useEffect(() => {
     initialize();
@@ -211,25 +219,24 @@ const Fixture = (props: Props): React.ReactElement => {
   return (
     <div className="App">
       <LinkButton to='/home'>Back</LinkButton>
-      <IconButton src={sidemenuIcon} onClick={() => setSidebarOpen(true)} />
-      <Sidebar
-        sidebar={<WrapperSidebar>
+      <IconButton src={sidemenuIcon} onClick={() => toggleMenu()} />
+      <div
+        className="side-bar"
+        style={{
+          transform: `translate(${xPosition}px)`,
+          width: 300
+        }}
+      >
+        <div className="content">
           <HeaderSidebar>Select Model</HeaderSidebar>
           {props.modelList.map((model: IModel) => 
             <ListElement onClick={() => {
-              setSidebarOpen(false);
+              toggleMenu();
               props.setModel({ name: model.label, path: model.value })
             }}>{model.label}</ListElement>
           )}
-        </WrapperSidebar>}
-        open={sidebarOpen}
-        onSetOpen={() => setSidebarOpen(!sidebarOpen)}
-        styles={{ sidebar: { background: "white" } }}
-        shadow={true}
-        pullRight={true}
-        touch={true}
-        transitions={true}
-      ></Sidebar>
+        </div>
+      </div>
       <div className="loading" id="js-loader">
         <div className="loader" />
       </div>
@@ -250,15 +257,15 @@ const Fixture = (props: Props): React.ReactElement => {
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/back.svg" alt=""/>
         </div>
       </div>
-      <div ref={canvasWrapper}>
+      <div className="canvas-element" ref={canvasWrapper}>
         <canvas id="c"></canvas>
       </div>
       <div className="controls">
-        <div className="info">
+        {/* <div className="info">
           <div className="info__message">
             <p><strong>&nbsp;Grab&nbsp;</strong> to rotate chair. <strong>&nbsp;Scroll&nbsp;</strong> to zoom. <strong>&nbsp;Drag&nbsp;</strong> swatches to view more.</p>
           </div>
-        </div>
+        </div> */}
         <div id="js-tray" className="tray">
           <div id="js-tray-slide" className="tray__slide"></div>
         </div>

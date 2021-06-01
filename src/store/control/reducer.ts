@@ -10,7 +10,8 @@ const initialState: IControlState = {
 		{ value: 'images/chair.glb', label: 'Chair' },
 		{ value: 'images/computer_table.glb', label: 'Computer Table' },
 		{ value: 'images/round_table.glb', label: 'Round Table' },
-		{ value: 'images/shelve.glb', label: 'Shelve' }
+		{ value: 'images/shelve.glb', label: 'Shelve' },
+		{ value: 'images/sofa.glb', label: 'Sofa' }
 	],
 	error: ''
 };
