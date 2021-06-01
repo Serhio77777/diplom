@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import NET from 'vanta/dist/vanta.net.min';
-import { useHistory } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom'
 import styled from 'styled-components';
 
 // import Header from '../../molecules/header/index';
@@ -56,8 +56,8 @@ const Home = () => {
           <LinkButton onClick={() => history.push('/fixture')}>Fixture</LinkButton> */}
         </Container>
         <WrapperCard>
-          <LinkButton>Home</LinkButton>
-          <LinkButton>Fixture</LinkButton>
+          <LinkButton to='/home'>Home</LinkButton>
+          <LinkButton to='/furniture'>Furniture</LinkButton>
 
         </WrapperCard>
       </div>
@@ -65,12 +65,12 @@ const Home = () => {
   )
 }
 
-const LinkButton = styled.button<{ theme: ITheme }>`
+const LinkButton = styled(Link)<{ theme: ITheme }>`
   font-family: monospace;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
-  line-height: 20px;
+  line-height: 66px;
   color: rgb(255 255 255);
   letter-spacing: 2px;
   margin: 0;

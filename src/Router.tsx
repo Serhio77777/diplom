@@ -14,7 +14,7 @@ const Main = () => {
 		<Router>
 			<Switch>
 				<Route exact path='/home' component={Home}></Route>
-				<Route exact path='/fixture' component={FixtureScreen}></Route>
+				<Route exact path='/furniture' component={FixtureScreen}></Route>
 				<Redirect from="/" to="/home" />
 			</Switch>
 		</Router>
