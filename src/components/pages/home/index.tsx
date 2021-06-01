@@ -25,6 +25,7 @@ const Home = () => {
   const myRef = useRef(null)
 
   useEffect(() => {
+    document.body.classList.add('menu');
     if (!vantaEffect) {
       setVantaEffect(NET({
         el: myRef.current,

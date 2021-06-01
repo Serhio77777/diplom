@@ -24,6 +24,8 @@ const Fixture = () => {
 		// window.addEventListener('resize', resizeWindow);
 
 		// props.initScene(container, animateCallback);
+    document.body.classList.remove('menu');
+
     initialize();
 	}, []);
 
