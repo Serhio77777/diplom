@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react'
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three-orbitcontrols-ts';
@@ -19,7 +19,7 @@ import {
 } from '../../../services/partials';
 
 const Fixture = () => {
-
+  const canvasWrapper = useRef(document.createElement('div'))
   const [activeOption, setActiveOption] = useState('legs');
 
 	useEffect(() => {
@@ -57,8 +57,9 @@ const Fixture = () => {
 
     renderer.shadowMap.enabled = true;
     renderer.setPixelRatio(window.devicePixelRatio); 
-    document.body.appendChild(renderer.domElement);
-  
+    canvasWrapper.current.appendChild(renderer.domElement);
+    // document.body.appendChild(renderer.domElement);
+
     const cameraFar = 5;
     const camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = cameraFar;
@@ -189,18 +190,6 @@ const Fixture = () => {
       <div className="loading" id="js-loader">
         <div className="loader" />
       </div>
-      <canvas id="c"></canvas>
-      <div className="controls">
-        <div className="info">
-          <div className="info__message">
-            <p><strong>&nbsp;Grab&nbsp;</strong> to rotate chair. <strong>&nbsp;Scroll&nbsp;</strong> to zoom. <strong>&nbsp;Drag&nbsp;</strong> swatches to view more.</p>
-          </div>
-        </div>
-        <div id="js-tray" className="tray">
-          <div id="js-tray-slide" className="tray__slide"></div>
-        </div>
-      </div>
-      <span className="drag-notice" id="js-drag-notice">Drag to rotate 360&#176;</span>
       <div className="options">
         <div className={activeOption ==='legs' ? 'option  --is-active' : 'option'} onClick={selectOption} data-option="legs">
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/legs.svg" alt=""/>
@@ -218,6 +207,20 @@ const Fixture = () => {
           <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/back.svg" alt=""/>
         </div>
       </div>
+      <div ref={canvasWrapper}>
+        <canvas id="c"></canvas>
+      </div>
+      <div className="controls">
+        <div className="info">
+          <div className="info__message">
+            <p><strong>&nbsp;Grab&nbsp;</strong> to rotate chair. <strong>&nbsp;Scroll&nbsp;</strong> to zoom. <strong>&nbsp;Drag&nbsp;</strong> swatches to view more.</p>
+          </div>
+        </div>
+        <div id="js-tray" className="tray">
+          <div id="js-tray-slide" className="tray__slide"></div>
+        </div>
+      </div>
+      <span className="drag-notice" id="js-drag-notice">Drag to rotate 360&#176;</span>
     </div>
   );
 }
