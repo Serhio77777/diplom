@@ -35,7 +35,7 @@ type Props = IProps & IDispatchProps;
 const Home = (props: Props): React.ReactElement => {
 	// const history = useHistory();
   const [vantaEffect, setVantaEffect] = useState<any>(0)
-  const [selectedOption, setSelectedOption] = useState<any>({ value: props.currentModel.path, label: props.currentModel.name });
+  const [selectedOption, setSelectedOption] = useState<any>({ value: props.currentModel.path, label: props.currentModel.name, elements: props.currentModel.elements });
   const myRef = useRef(null)
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const Home = (props: Props): React.ReactElement => {
   }, [vantaEffect])
 
   useEffect(() => {
-    setSelectedOption({ value: props.currentModel.path, label: props.currentModel.name });
+    setSelectedOption({ value: props.currentModel.path, label: props.currentModel.name, elements: props.currentModel.elements });
   }, [props.currentModel])
 
   return (
@@ -77,7 +77,7 @@ const Home = (props: Props): React.ReactElement => {
           <Select
             className="react-selector"
             defaultValue={selectedOption}
-            onChange={(model) => props.setModel({ name: model.label, path: model.value })}
+            onChange={(model) => props.setModel({ name: model.label, path: model.value, elements: model.elements })}
             options={props.modelList}
           />          
           <LinkButton to='/furniture'>Furniture</LinkButton>

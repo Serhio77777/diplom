@@ -1,11 +1,13 @@
 export interface IModel {
   label: string;
   value: string;
+  elements: any[]
 }
 
 export interface ICurrentModel {
   name: string;
   path: string;
+  elements: any[]
 }
 
 export interface IControlState {

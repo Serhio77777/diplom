@@ -90,13 +90,12 @@ const Fixture = (props: Props): React.ReactElement => {
       theModel.position.y = -1;
     
       const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
-      const INITIAL_MAP = [
-        {childID: "back", mtl: INITIAL_MTL},
-        {childID: "base", mtl: INITIAL_MTL},
-        {childID: "cushions", mtl: INITIAL_MTL},
-        {childID: "legs", mtl: INITIAL_MTL},
-        {childID: "supports", mtl: INITIAL_MTL},
-      ];
+      console.log(props.currentModel)
+      const INITIAL_MAP = props.currentModel.elements.map(item => {
+        return {
+         childID: item.name, mtl: INITIAL_MTL
+        }
+      });
 
       for (let object of INITIAL_MAP) {
         initColor(theModel, object.childID, object.mtl);
@@ -219,7 +218,7 @@ const Fixture = (props: Props): React.ReactElement => {
           {props.modelList.map((model: IModel) => 
             <ListElement onClick={() => {
               toggleMenu();
-              props.setModel({ name: model.label, path: model.value })
+              props.setModel({ name: model.label, path: model.value, elements: model.elements })
             }}>{model.label}</ListElement>
           )}
         </div>
