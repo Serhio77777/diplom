@@ -56,7 +56,6 @@ const Home = () => {
           <LinkButton onClick={() => history.push('/fixture')}>Fixture</LinkButton> */}
         </Container>
         <WrapperCard>
-          <LinkButton to='/home'>Home</LinkButton>
           <LinkButton to='/furniture'>Furniture</LinkButton>
 
         </WrapperCard>

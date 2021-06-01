@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three-orbitcontrols-ts';
+import {Link} from 'react-router-dom'
+import styled from 'styled-components';
 
 import { 
   resizeRendererToDisplaySize, 
@@ -183,6 +185,7 @@ const Fixture = () => {
 
   return (
     <div className="App">
+      <LinkButton to='/home'>Back</LinkButton>
       <div className="loading" id="js-loader">
         <div className="loader" />
       </div>
@@ -218,5 +221,29 @@ const Fixture = () => {
     </div>
   );
 }
+
+
+const LinkButton = styled(Link)`
+  font-family: monospace;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 15px;
+  text-align: center;
+  color: rgb(255 255 255);
+  padding-top: 6px;
+  margin: 0;
+  text-decoration: none;
+  background-color: #a1a1a1;
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+  left: 65px;
+  top: 11px;
+  display: block;
+  position: absolute;
+`;
+
 
 export default Fixture;

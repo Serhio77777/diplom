@@ -139,6 +139,8 @@ body {
 }
 .drag-notice.start {
   animation: popout 0.25s 3s forwards;
+  top: calc(50% - 63px);
+  left: calc(50% - 63px);
 }
 @keyframes popout {
   to {
