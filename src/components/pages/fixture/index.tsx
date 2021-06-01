@@ -4,6 +4,9 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { OrbitControls } from 'three-orbitcontrols-ts';
 import {Link} from 'react-router-dom'
 import styled from 'styled-components';
+import Sidebar from "react-sidebar";
+
+import { ICurrentModel, IModel } from '../../../store/control/types';
 
 import { 
   resizeRendererToDisplaySize, 
@@ -18,14 +21,29 @@ import {
   slide
 } from '../../../services/partials';
 
-const Fixture = () => {
+import sidemenuIcon from '../../../assets/sidemenu.svg';
+
+export interface IDispatchProps {
+  setModel: (model: ICurrentModel) => void;
+}
+
+export interface IProps {
+	currentModel: ICurrentModel;
+  modelList: Array<IModel>;
+}
+
+type Props = IProps & IDispatchProps;
+
+const Fixture = (props: Props): React.ReactElement => {
   const canvasWrapper = useRef(document.createElement('div'))
   const [activeOption, setActiveOption] = useState('legs');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	useEffect(() => {
 		// window.addEventListener('resize', resizeWindow);
 
 		// props.initScene(container, animateCallback);
+    console.log(props)
     document.body.classList.remove('menu');
 
     initialize();
@@ -66,11 +84,11 @@ const Fixture = () => {
     camera.position.x = 0;
   
     let theModel: any;
-    const MODEL_PATH = "images/chair.glb";
+    // const MODEL_PATH = "images/chair.glb";
   
     const loader = new GLTFLoader();
   
-    loader.load(MODEL_PATH, function(gltf) {
+    loader.load(props.currentModel.path, function(gltf) {
       theModel = gltf.scene;
       theModel.traverse((o: any) => {
         if (o.isMesh) {
@@ -96,7 +114,9 @@ const Fixture = () => {
         initColor(theModel, object.childID, object.mtl);
       }
         scene.add(theModel);
-        LOADER.remove();
+        if (LOADER) {
+          LOADER.remove();
+        }
     }, undefined, function(error) {
       console.error(error)
     });
@@ -184,9 +204,32 @@ const Fixture = () => {
     // setActiveOption(e.target.dataset.option);
   }
 
+  useEffect(() => {
+    initialize();
+  }, [props.currentModel])
+
   return (
     <div className="App">
       <LinkButton to='/home'>Back</LinkButton>
+      <IconButton src={sidemenuIcon} onClick={() => setSidebarOpen(true)} />
+      <Sidebar
+        sidebar={<WrapperSidebar>
+          <HeaderSidebar>Select Model</HeaderSidebar>
+          {props.modelList.map((model: IModel) => 
+            <ListElement onClick={() => {
+              setSidebarOpen(false);
+              props.setModel({ name: model.label, path: model.value })
+            }}>{model.label}</ListElement>
+          )}
+        </WrapperSidebar>}
+        open={sidebarOpen}
+        onSetOpen={() => setSidebarOpen(!sidebarOpen)}
+        styles={{ sidebar: { background: "white" } }}
+        shadow={true}
+        pullRight={true}
+        touch={true}
+        transitions={true}
+      ></Sidebar>
       <div className="loading" id="js-loader">
         <div className="loader" />
       </div>
@@ -225,6 +268,47 @@ const Fixture = () => {
   );
 }
 
+const HeaderSidebar = styled.div`
+  width: 300px;
+  height: 60px;
+  font-family: monospace;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  text-align: center;
+  padding: 20px 15px;
+  border-bottom: 1px solid;
+`;
+
+const WrapperSidebar = styled.div`
+  width: 300px;
+  height: calc(100% - 60px);
+`;
+
+const ListElement = styled.div`
+  width: 100%;
+  height: 40px;
+  font-family: monospace;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 15px;
+  text-align: center;
+  padding: 10px 15px;
+  cursor: pointer;
+`;
+
+const IconButton = styled.img`
+  width: 35px;
+  height: 35px;
+  border-radius: 15px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: white;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 1;
+`;
 
 const LinkButton = styled(Link)`
   font-family: monospace;
@@ -246,6 +330,7 @@ const LinkButton = styled(Link)`
   top: 11px;
   display: block;
   position: absolute;
+  z-index: 1;
 `;
 
 

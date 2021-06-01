@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import NET from 'vanta/dist/vanta.net.min';
-import {Link, useHistory} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 import Select from 'react-select';
 
-// import Header from '../../molecules/header/index';
+import { ICurrentModel, IModel } from '../../../store/control/types';
+
 import './style.css';
 
 export interface ITheme {
@@ -20,16 +21,21 @@ export interface ITheme {
   border?: string;
 }
 
-const options = [
-  { value: 'images/chair.glb', label: 'Chair' },
-  { value: 'strawberry', label: 'Strawberry' }
-];
+export interface IDispatchProps {
+  setModel: (model: ICurrentModel) => void;
+}
 
+export interface IProps {
+	currentModel: ICurrentModel;
+  modelList: Array<IModel>;
+}
 
-const Home = () => {
+type Props = IProps & IDispatchProps;
+
+const Home = (props: Props): React.ReactElement => {
 	// const history = useHistory();
   const [vantaEffect, setVantaEffect] = useState<any>(0)
-  const [selectedOption, setSelectedOption] = useState<any>({ value: 'images/chair.glb', label: 'Chair' });
+  const [selectedOption, setSelectedOption] = useState<any>({ value: props.currentModel.path, label: props.currentModel.name });
   const myRef = useRef(null)
 
   useEffect(() => {
@@ -55,6 +61,10 @@ const Home = () => {
     }
   }, [vantaEffect])
 
+  useEffect(() => {
+    setSelectedOption({ value: props.currentModel.path, label: props.currentModel.name });
+  }, [props.currentModel])
+
   return (
     // <>
       <div className="home-page" ref={myRef}>
@@ -67,8 +77,8 @@ const Home = () => {
           <Select
             className="react-selector"
             defaultValue={selectedOption}
-            onChange={(value) => setSelectedOption(value)}
-            options={options}
+            onChange={(model) => props.setModel({ name: model.label, path: model.value })}
+            options={props.modelList}
           />          
           <LinkButton to='/furniture'>Furniture</LinkButton>
 

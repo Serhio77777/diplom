@@ -6,8 +6,8 @@ import {
 	Redirect
 } from 'react-router-dom';
 
-import Home from './components/pages/home/index';
-import FixtureScreen from './components/pages/fixture/index';
+import Home from './components/pages/home/container';
+import FixtureScreen from './components/pages/fixture/container';
 
 const Main = () => {
 	return (
