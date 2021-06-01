@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import NET from 'vanta/dist/vanta.net.min';
 import {Link, useHistory} from 'react-router-dom'
 import styled from 'styled-components';
+import Select from 'react-select';
 
 // import Header from '../../molecules/header/index';
 import './style.css';
@@ -19,9 +20,16 @@ export interface ITheme {
   border?: string;
 }
 
+const options = [
+  { value: 'images/chair.glb', label: 'Chair' },
+  { value: 'strawberry', label: 'Strawberry' }
+];
+
+
 const Home = () => {
 	// const history = useHistory();
   const [vantaEffect, setVantaEffect] = useState<any>(0)
+  const [selectedOption, setSelectedOption] = useState<any>({ value: 'images/chair.glb', label: 'Chair' });
   const myRef = useRef(null)
 
   useEffect(() => {
@@ -56,6 +64,12 @@ const Home = () => {
           <LinkButton onClick={() => history.push('/fixture')}>Fixture</LinkButton> */}
         </Container>
         <WrapperCard>
+          <Select
+            className="react-selector"
+            defaultValue={selectedOption}
+            onChange={(value) => setSelectedOption(value)}
+            options={options}
+          />          
           <LinkButton to='/furniture'>Furniture</LinkButton>
 
         </WrapperCard>
@@ -67,8 +81,8 @@ const Home = () => {
 const LinkButton = styled(Link)<{ theme: ITheme }>`
   font-family: monospace;
   font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
+  font-weight: 900;
+  font-size: 22px;
   line-height: 66px;
   color: rgb(255 255 255);
   letter-spacing: 2px;
@@ -106,10 +120,10 @@ const WrapperCard = styled.div`
   min-width: 400px;
   max-width: 400px;
   margin: 200px auto;
-  border: 1px solid rgb(194 201 209 / 45%);
+  background: rgb(9 9 9 / 53%);
   -webkit-box-shadow: -2px -1px 15px 7px rgba(0,0,0,0.5);
   -moz-box-shadow: -3px -2px 30px 14px rgba(0,0,0,0.425);
-  box-shadow: -4px -3px 9px 8px rgb(255 255 255 / 41%);
+  box-shadow: -4px -3px 9px 8px rgb(9 9 9 / 53%);
 
   display: flex;
   flex-direction: column;
