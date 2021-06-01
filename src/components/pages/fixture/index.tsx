@@ -15,10 +15,7 @@ import {
   colors
 } from '../../../services/calculation';
 
-import { 
-  initialRotation,
-  slide
-} from '../../../services/partials';
+import { slide } from '../../../services/partials';
 
 import sidemenuIcon from '../../../assets/sidemenu.svg';
 import exit from '../../../assets/exit.svg';
@@ -40,16 +37,11 @@ const Fixture = (props: Props): React.ReactElement => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	useEffect(() => {
-		// window.addEventListener('resize', resizeWindow);
-
-		// props.initScene(container, animateCallback);
-    console.log(props)
     document.body.classList.remove('menu');
 
     initialize();
 	}, []);
 
-    // slide(slider, sliderItems);
   const initialize = () => {
     const DRAG_NOTICE: any = document.getElementById('js-drag-notice');
     const TRAY: any = document.getElementById('js-tray-slide');
@@ -58,9 +50,8 @@ const Fixture = (props: Props): React.ReactElement => {
 
     let activeOption = 'legs';
     let loaded = false;
-    // let initRotate = 0;
 
-    const BACKGROUND_COLOR = 0xf1f1f1;
+    const BACKGROUND_COLOR = 0xC7BDBD;
 
     const scene: any = new THREE.Scene();
   
@@ -68,8 +59,6 @@ const Fixture = (props: Props): React.ReactElement => {
     scene.fog = new THREE.Fog(BACKGROUND_COLOR, 20, 100);
   
     const canvas: any = document.querySelector('#c');
-    console.log([canvas])
-    // renderer.render(scene, camera);
   
     const renderer: any = new THREE.WebGLRenderer({canvas, antialias: true});
     renderer.autoClear = true;
@@ -77,7 +66,6 @@ const Fixture = (props: Props): React.ReactElement => {
     renderer.shadowMap.enabled = true;
     renderer.setPixelRatio(window.devicePixelRatio); 
     canvasWrapper.current.appendChild(renderer.domElement);
-    // document.body.appendChild(renderer.domElement);
 
     const cameraFar = 5;
     const camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -85,8 +73,7 @@ const Fixture = (props: Props): React.ReactElement => {
     camera.position.x = 0;
   
     let theModel: any;
-    // const MODEL_PATH = "images/chair.glb";
-  
+
     const loader = new GLTFLoader();
   
     loader.load(props.currentModel.path, function(gltf) {
@@ -99,7 +86,7 @@ const Fixture = (props: Props): React.ReactElement => {
       });
       theModel.scale.set(2,2,2);
       theModel.rotation.y = Math.PI;
-          // Offset the y position a bit
+      // Offset the y position a bit
       theModel.position.y = -1;
     
       const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
@@ -188,7 +175,6 @@ const Fixture = (props: Props): React.ReactElement => {
       }
       
       if (theModel && !loaded) {
-        initialRotation(loaded, theModel);
         DRAG_NOTICE.classList.add('start');
       }
     }

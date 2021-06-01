@@ -1,14 +1,3 @@
-let initRotate = 0;
-
-export const initialRotation = (loaded: boolean, theModel: any) => {
-  initRotate++;
-  if (initRotate <= 120) {
-    theModel.rotation.y += Math.PI / 60;
-  } else {
-    loaded = true;
-  }
-}
-
 let difference: any;
 
 export const slide = (slider: any, items: any, sliderItems: any) => {
