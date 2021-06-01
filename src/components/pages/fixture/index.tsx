@@ -157,7 +157,7 @@ const Fixture = (props: Props): React.ReactElement => {
     // Floor
     const floorGeometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
     const floorMaterial = new THREE.MeshPhongMaterial({
-      color: 0xeeeeee,
+      color: 0xe1d7d7,
       shininess: 0
     });
 
