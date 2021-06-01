@@ -53,7 +53,6 @@ const LinkButton = styled.button<{ theme: ITheme }>`
 const Container = styled.div`
   max-height: 40px;
   height: 40px;
-  border-bottom: 1px solid rgb(194,201,209,1);
   width: 100%;
 `;
 
