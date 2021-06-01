@@ -278,19 +278,5 @@ body {
   transition: 0.8s ease;
   position: absolute;
   right: 0;
-
-}
-
-.toggle-menu {
-  height: 50px;
-  border-top-right-radius: 10rem;
-  border-bottom-right-radius: 9rem;
-  width: 10px;
-  position: absolute;
-  outline: none;
-  z-index: 1;
-  background-color: rgba(64, 194, 133, 0.693);
-  border-color: rgba(64, 194, 133, 0.693);
-  border-left: 0;
   z-index: 1;
 }

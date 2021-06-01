@@ -21,6 +21,7 @@ import {
 } from '../../../services/partials';
 
 import sidemenuIcon from '../../../assets/sidemenu.svg';
+import exit from '../../../assets/exit.svg';
 
 export interface IDispatchProps {
   setModel: (model: ICurrentModel) => void;
@@ -228,7 +229,7 @@ const Fixture = (props: Props): React.ReactElement => {
         }}
       >
         <div className="content">
-          <HeaderSidebar>Select Model</HeaderSidebar>
+          <HeaderSidebar>Select Model<IconButton isExit src={exit} onClick={() => toggleMenu()} /></HeaderSidebar>
           {props.modelList.map((model: IModel) => 
             <ListElement onClick={() => {
               toggleMenu();
@@ -304,15 +305,15 @@ const ListElement = styled.div`
   cursor: pointer;
 `;
 
-const IconButton = styled.img`
+const IconButton = styled.img<{ isExit?: boolean }>`
   width: 35px;
   height: 35px;
   border-radius: 15px;
   position: absolute;
   right: 20px;
-  top: 20px;
+  top: ${({ isExit }) => isExit ? '20px' : '15px'};
   background: white;
-  padding: 5px;
+  padding: ${({ isExit }) => isExit ? '5px' : '9px'};
   cursor: pointer;
   z-index: 1;
 `;
