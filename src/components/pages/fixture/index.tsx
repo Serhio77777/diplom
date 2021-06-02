@@ -33,7 +33,7 @@ type Props = IProps & IDispatchProps;
 
 const Fixture = (props: Props): React.ReactElement => {
   const canvasWrapper = useRef(document.createElement('div'))
-  const [activeOption, setActiveOption] = useState('legs');
+  const [activeOption, setActiveOption] = useState(props.currentModel.elements[0]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	useEffect(() => {
@@ -48,7 +48,7 @@ const Fixture = (props: Props): React.ReactElement => {
     const LOADER: any = document.getElementById('js-loader');
     buildColors(colors, TRAY);
 
-    let activeOption = 'legs';
+    let activeOption = props.currentModel.elements[0];
     let loaded = false;
 
     const BACKGROUND_COLOR = 0xC7BDBD;
@@ -90,13 +90,11 @@ const Fixture = (props: Props): React.ReactElement => {
       theModel.position.y = -1;
     
       const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
-      const INITIAL_MAP = [
-        {childID: "back", mtl: INITIAL_MTL},
-        {childID: "base", mtl: INITIAL_MTL},
-        {childID: "cushions", mtl: INITIAL_MTL},
-        {childID: "legs", mtl: INITIAL_MTL},
-        {childID: "supports", mtl: INITIAL_MTL},
-      ];
+      const INITIAL_MAP = props.currentModel.elements.map(item => {
+        return {
+         childID: item.name, mtl: INITIAL_MTL
+        }
+      });
 
       for (let object of INITIAL_MAP) {
         initColor(theModel, object.childID, object.mtl);
@@ -219,7 +217,7 @@ const Fixture = (props: Props): React.ReactElement => {
           {props.modelList.map((model: IModel) => 
             <ListElement onClick={() => {
               toggleMenu();
-              props.setModel({ name: model.label, path: model.value })
+              props.setModel({ name: model.label, path: model.value, elements: model.elements })
             }}>{model.label}</ListElement>
           )}
         </div>
@@ -228,21 +226,15 @@ const Fixture = (props: Props): React.ReactElement => {
         <div className="loader" />
       </div>
       <div className="options">
-        <div className={activeOption ==='legs' ? 'option  --is-active' : 'option'} onClick={selectOption} data-option="legs">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/legs.svg" alt=""/>
-        </div>
-        <div className={activeOption ==='cushions' ? 'option  --is-active' : 'option'} onClick={selectOption} data-option="cushions">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/cushions.svg" alt=""/>
-        </div>
-        <div className={activeOption ==='base' ? 'option  --is-active' : 'option'} onClick={selectOption} data-option="base">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/base.svg" alt=""/>
-        </div>
-        <div className={activeOption ==='supports' ? 'option  --is-active' : 'option'} onClick={selectOption} data-option="supports">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/supports.svg" alt=""/>
-        </div>
-        <div className={activeOption ==='back' ? 'option  --is-active' : 'option'} onClick={selectOption} data-option="back">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1376484/back.svg" alt=""/>
-        </div>
+        {
+          props.currentModel.elements.map(item => {
+            return (
+              <div className={activeOption === item.name ? 'option  --is-active' : 'option'} onClick={selectOption} data-option={item.name}>
+                {item.name}
+              </div>
+            )
+          })
+        }
       </div>
       <div className="canvas-element" ref={canvasWrapper}>
         <canvas id="c"></canvas>
