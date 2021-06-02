@@ -62,22 +62,53 @@ body {
   background-color: #f8eeb8;
   margin-bottom: 3px;
   padding: 10px;
-  height: 55px;
-  width: 75px;
+  height: 45px;
+  width: 95px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+.option::after {
+  content: '';
+  position: absolute;
+  right: 0; 
+  top: 0;
+  width: 15px; 
+  height: 55px;
+  background: -moz-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: -webkit-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: -o-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: -ms-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: linear-gradient(to right, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+}
+.option::before {
+  content: '';
+  position: absolute;
+  left: 0; 
+  top: 0;
+  width: 15px; 
+  height: 55px;
+  background: -moz-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: -webkit-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: -o-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: -ms-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: linear-gradient(to right, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
 }
 .option:hover {
   border-left: 5px solid white;
-  width: 78px;
+  width: 98px;
 }
 .option.--is-active {
   border-right: 3px solid #ff9e54;
-  width: 78px;
+  width: 98px;
   cursor: default;
 }
 .option.--is-active:hover {
