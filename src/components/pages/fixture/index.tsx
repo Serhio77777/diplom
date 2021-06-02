@@ -248,7 +248,7 @@ const Fixture = (props: Props): React.ReactElement => {
           <div id="js-tray-slide" className="tray__slide"></div>
         </div>
       </div>
-      <span className="drag-notice" id="js-drag-notice">Drag to rotate 360&#176;</span>
+      <span className="drag-notice" id="js-drag-notice">Drag model to rotate</span>
     </div>
   );
 }
