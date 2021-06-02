@@ -34,7 +34,6 @@ type Props = IProps & IDispatchProps;
 const Fixture = (props: Props): React.ReactElement => {
   const canvasWrapper = useRef(document.createElement('div'))
   const [activeOption, setActiveOption] = useState(props.currentModel.elements[0]);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	useEffect(() => {
     document.body.classList.remove('menu');
@@ -92,7 +91,7 @@ const Fixture = (props: Props): React.ReactElement => {
       const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
       const INITIAL_MAP = props.currentModel.elements.map(item => {
         return {
-         childID: item.name, mtl: INITIAL_MTL
+          childID: item.name, mtl: INITIAL_MTL
         }
       });
 
@@ -312,7 +311,7 @@ const LinkButton = styled(Link)`
   cursor: pointer;
   width: 80px;
   height: 30px;
-  left: 65px;
+  left: 85px;
   top: 11px;
   display: block;
   position: absolute;

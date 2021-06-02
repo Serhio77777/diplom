@@ -59,25 +59,25 @@ body {
   left: 0;
 }
 .option {
-  background-size: cover;
-  background-position: 50%;
-  background-color: white;
+  background-color: #f8eeb8;
   margin-bottom: 3px;
   padding: 10px;
   height: 55px;
-  width: 55px;
+  width: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
 }
 .option:hover {
   border-left: 5px solid white;
-  width: 58px;
+  width: 78px;
 }
 .option.--is-active {
-  border-right: 3px solid red;
-  width: 58px;
+  border-right: 3px solid #ff9e54;
+  width: 78px;
   cursor: default;
 }
 .option.--is-active:hover {
