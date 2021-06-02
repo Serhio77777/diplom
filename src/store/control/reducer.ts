@@ -5,14 +5,37 @@ const initialState: IControlState = {
 	currentModel: {
 		name: 'Chair',
 		path: 'images/chair.glb',
-		elements: [{ name: 'legs' }, { name: 'cushions' }, { name: 'base' }, { name: 'supports' }, { name: 'back' }]
+		elements: [{ name: 'legs' }, { name: 'cushions' }, { name: 'base' }, { name: 'supports' }, { name: 'back' }],
+		rotate: Math.PI
 	},
 	modelList: [
-		{ value: 'images/chair.glb', label: 'Chair', elements: [{ name: 'legs' }, { name: 'cushions' }, { name: 'base' }, { name: 'supports' }, { name: 'back' }] },
-		{ value: 'images/computer_table.glb', label: 'Computer Table', elements: [{ name: 'table' }] },
-		{ value: 'images/round_table.glb', label: 'Round Table', elements: [{ name: 'leg' }] },
-		{ value: 'images/shelve.glb', label: 'Shelve', elements: [{ name: 'shelve' }] },
-		{ value: 'images/sofa.glb', label: 'Sofa', elements: [{ name: 'back' }, { name: 'back' }, { name: 'back_cushion' }, { name: 'seat' }, { name: 'seat_bottom' }, { name: 'sidewall' }] }
+		{
+			value: 'images/chair.glb',
+			label: 'Chair',
+			elements: [{ name: 'legs' }, { name: 'cushions' }, { name: 'base' }, { name: 'supports' }, { name: 'back' }],
+			rotate: Math.PI
+		},
+		{
+			value: 'images/computer_table.glb',
+			label: 'Computer Table',
+			elements: [{ name: 'table' }]
+		},
+		{
+			value: 'images/round_table.glb',
+			label: 'Round Table',
+			elements: [{ name: 'leg' }]
+		},
+		{
+			value: 'images/shelve.glb',
+			label: 'Shelve',
+			elements: [{ name: 'shelve' }]
+		},
+		{
+			value: 'images/sofa.glb',
+			label: 'Sofa',
+			elements: [{ name: 'back' }, { name: 'back' }, { name: 'back_cushion' }, { name: 'seat' }, { name: 'seat_bottom' }, { name: 'sidewall' }],
+			rotate: -Math.PI / 2
+		}
 	],
 	error: ''
 };
