@@ -84,7 +84,10 @@ const Fixture = (props: Props): React.ReactElement => {
         }
       });
       theModel.scale.set(2,2,2);
-      theModel.rotation.y = Math.PI;
+
+      if (props.currentModel.rotate) {
+        theModel.rotation.y = props.currentModel.rotate;
+      }
       // Offset the y position a bit
       theModel.position.y = -1;
     
@@ -216,7 +219,7 @@ const Fixture = (props: Props): React.ReactElement => {
           {props.modelList.map((model: IModel) => 
             <ListElement onClick={() => {
               toggleMenu();
-              props.setModel({ name: model.label, path: model.value, elements: model.elements })
+              props.setModel({ name: model.label, path: model.value, elements: model.elements, rotate: model.rotate })
             }}>{model.label}</ListElement>
           )}
         </div>

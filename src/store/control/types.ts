@@ -1,13 +1,15 @@
 export interface IModel {
   label: string;
   value: string;
-  elements: any[]
+  elements: any[];
+  rotate?: any;
 }
 
 export interface ICurrentModel {
   name: string;
   path: string;
-  elements: any[]
+  elements: any[];
+  rotate?: any;
 }
 
 export interface IControlState {
