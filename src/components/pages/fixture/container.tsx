@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { IControlState, ICurrentModel } from '../../../store/control/types';
-import Fixture, { IDispatchProps, IProps } from './index';
+import Furniture, { IDispatchProps, IProps } from './index';
 import * as ControlActions from '../../../store/control/actions';
 
 const mapStateToProps = (state: { control: IControlState }): IProps => {
@@ -17,4 +17,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IDispatchProps => ({
 	}
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Fixture);
+export default connect(mapStateToProps, mapDispatchToProps)(Furniture);

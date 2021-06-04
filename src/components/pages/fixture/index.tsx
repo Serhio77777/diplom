@@ -31,7 +31,7 @@ export interface IProps {
 
 type Props = IProps & IDispatchProps;
 
-const Fixture = (props: Props): React.ReactElement => {
+const Furniture = (props: Props): React.ReactElement => {
   const canvasWrapper = useRef(document.createElement('div'))
   const [activeOption, setActiveOption] = useState(props.currentModel.elements[0]);
 
@@ -71,42 +71,62 @@ const Fixture = (props: Props): React.ReactElement => {
     camera.position.z = cameraFar;
     camera.position.x = 0;
   
-    let theModel: any;
+    let model3D: any;
 
     const loader = new GLTFLoader();
-  
-    loader.load(props.currentModel.path, function(gltf) {
-      theModel = gltf.scene;
-      theModel.traverse((o: any) => {
-        if (o.isMesh) {
-          o.castShadow = true;
-          o.receiveShadow = true;
-        }
-      });
-      theModel.scale.set(2,2,2);
 
-      if (props.currentModel.rotate) {
-        theModel.rotation.y = props.currentModel.rotate;
-      }
-      // Offset the y position a bit
-      theModel.position.y = -1;
-    
+    const getInitMaterials = () => {
       const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10 } );
-      const INITIAL_MAP = props.currentModel.elements.map(item => {
+
+      return props.currentModel.elements.map(item => {
         return {
           childID: item.name, mtl: INITIAL_MTL
         }
       });
+    }
 
-      for (let object of INITIAL_MAP) {
-        initColor(theModel, object.childID, object.mtl);
+    const setInitMaterials = (materials: any[]) => {
+      for (let object of materials) {
+        initColor(model3D, object.childID, object.mtl);
       }
-        scene.add(theModel);
-        if (LOADER) {
-          LOADER.remove();
+    }
+
+    const setShadow = () => {
+      model3D.traverse((object: any) => {
+        if (object.isMesh) {
+          object.castShadow = true;
+          object.receiveShadow = true;
         }
+      });
+    }
+
+    const setPosition = () => {
+      model3D.scale.set(2,2,2);
+
+      if (props.currentModel.rotate) {
+        model3D.rotation.y = props.currentModel.rotate;
+      }
+
+      model3D.position.y = -1;
+    }
+
+    loader.load(props.currentModel.path, function(gltf) {
+      model3D = gltf.scene;
+
+      setShadow();
+      setPosition();
+
+      const INIT_MATERIALS = getInitMaterials()
+
+      setInitMaterials(INIT_MATERIALS);
+
+      scene.add(model3D);
+
+      if (LOADER) {
+        LOADER.remove();
+      }
     }, undefined, function(error) {
-      console.error(error)
+      console.error(error);
     });
 
     const options: any = document.querySelectorAll(".option");
@@ -127,7 +147,7 @@ const Fixture = (props: Props): React.ReactElement => {
     const swatches: any = document.querySelectorAll(".tray__swatch");
 
     for (const swatch of swatches) {
-      swatch.addEventListener('click', (e: any) => selectSwatch(e, colors, theModel, activeOption));
+      swatch.addEventListener('click', (e: any) => selectSwatch(e, colors, model3D, activeOption));
     }
 
     const hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.61 );
@@ -174,7 +194,7 @@ const Fixture = (props: Props): React.ReactElement => {
         camera.updateProjectionMatrix();
       }
       
-      if (theModel && !loaded) {
+      if (model3D && !loaded) {
         DRAG_NOTICE.classList.add('start');
       }
     }
@@ -322,4 +342,4 @@ const LinkButton = styled(Link)`
 `;
 
 
-export default Fixture;
+export default Furniture;
