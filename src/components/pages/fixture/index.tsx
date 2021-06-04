@@ -19,6 +19,9 @@ import { slide } from '../../../services/partials';
 
 import sidemenuIcon from '../../../assets/sidemenu.svg';
 import exit from '../../../assets/exit.svg';
+import SideMenu from './sidemenu'
+import Options from './options'
+import TexturePicker from './texturepicker'
 
 export interface IDispatchProps {
   setModel: (model: ICurrentModel) => void;
@@ -30,6 +33,10 @@ export interface IProps {
 }
 
 type Props = IProps & IDispatchProps;
+
+const Scene = () => {
+  return <div></div>
+}
 
 const Furniture = (props: Props): React.ReactElement => {
   const canvasWrapper = useRef(document.createElement('div'))
@@ -226,57 +233,31 @@ const Furniture = (props: Props): React.ReactElement => {
   return (
     <div className="App">
       <LinkButton to='/home'>Back</LinkButton>
-      <IconButton src={sidemenuIcon} onClick={() => toggleMenu()} />
-      <div
-        className="side-bar"
-        style={{
-          transform: `translate(${xPosition}px)`,
-          width: 300
-        }}
-      >
-        <div className="content">
-          <HeaderSidebar>Select Model<IconButton isExit src={exit} onClick={() => toggleMenu()} /></HeaderSidebar>
-          {props.modelList.map((model: IModel) => 
-            <ListElement onClick={() => {
-              toggleMenu();
-              props.setModel({ name: model.label, path: model.value, elements: model.elements, rotate: model.rotate })
-            }}>{model.label}</ListElement>
-          )}
-        </div>
-      </div>
+      <SideMenu
+        toggleMenu={toggleMenu}
+        xPosition={xPosition}
+        setModel={props.setModel}
+        modelList={props.modelList}
+      />
       <div className="loading" id="js-loader">
         <div className="loader" />
       </div>
-      <div className="options">
-        {
-          props.currentModel.elements.map(item => {
-            return (
-              <div className={activeOption === item.name ? 'option  --is-active' : 'option'} onClick={selectOption} data-option={item.name}>
-                {item.name}
-              </div>
-            )
-          })
-        }
-      </div>
+      <Options
+        activeOption={activeOption}
+        currentModel={props.currentModel}
+        selectOption={selectOption}
+      />
       <div className="canvas-element" ref={canvasWrapper}>
         <canvas id="c"></canvas>
       </div>
-      <div className="controls">
-        {/* <div className="info">
-          <div className="info__message">
-            <p><strong>&nbsp;Grab&nbsp;</strong> to rotate chair. <strong>&nbsp;Scroll&nbsp;</strong> to zoom. <strong>&nbsp;Drag&nbsp;</strong> swatches to view more.</p>
-          </div>
-        </div> */}
-        <div id="js-tray" className="tray">
-          <div id="js-tray-slide" className="tray__slide"></div>
-        </div>
-      </div>
+      <Scene />
+      <TexturePicker />
       <span className="drag-notice" id="js-drag-notice">Drag model to rotate</span>
     </div>
   );
 }
 
-const HeaderSidebar = styled.div`
+export const HeaderSidebar = styled.div`
   width: 300px;
   height: 60px;
   font-family: monospace;
@@ -293,7 +274,7 @@ const WrapperSidebar = styled.div`
   height: calc(100% - 60px);
 `;
 
-const ListElement = styled.div`
+export const ListElement = styled.div`
   width: 100%;
   height: 40px;
   font-family: monospace;
@@ -305,7 +286,7 @@ const ListElement = styled.div`
   cursor: pointer;
 `;
 
-const IconButton = styled.img<{ isExit?: boolean }>`
+export const IconButton = styled.img<{ isExit?: boolean }>`
   width: 35px;
   height: 35px;
   border-radius: 15px;
