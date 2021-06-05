@@ -315,7 +315,7 @@ const LinkButton = styled(Link)`
   cursor: pointer;
   width: 80px;
   height: 30px;
-  left: 105px;
+  left: 20px;
   top: 9px;
   display: block;
   position: absolute;

@@ -56,14 +56,15 @@ body {
 }
 .options {
   position: absolute;
-  left: 0;
+  left: 10px;
+  top: 50px;
 }
 .option {
-  background-color: #f8eeb8;
-  margin-bottom: 3px;
+  background-color: #fff;
+  margin-bottom: 10px;
   padding: 10px;
-  height: 45px;
-  width: 95px;
+  height: 36px;
+  width: 140px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -83,11 +84,11 @@ body {
   top: 0;
   width: 15px; 
   height: 55px;
-  background: -moz-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
-  background: -webkit-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
-  background: -o-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
-  background: -ms-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
-  background: linear-gradient(to right, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: -moz-linear-gradient(left, rgba(255, 255, 255, 0.1), #fff 100%);
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.1), #fff 100%);
+  background: -o-linear-gradient(left, rgba(255, 255, 255, 0.1), #fff 100%);
+  background: -ms-linear-gradient(left, rgba(255, 255, 255, 0.1), #fff 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), #fff 100%);
 }
 .option::before {
   content: '';
@@ -96,19 +97,19 @@ body {
   top: 0;
   width: 15px; 
   height: 55px;
-  background: -moz-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
-  background: -webkit-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
-  background: -o-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
-  background: -ms-linear-gradient(left, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
-  background: linear-gradient(to right, rgba(248, 238, 184, 0.1), #f8eeb8 100%);
+  background: -moz-linear-gradient(left, rgba(255, 255, 255, 0.1), #fff 100%);
+  background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.1), #fff 100%);
+  background: -o-linear-gradient(left, rgba(255, 255, 255, 0.1), #fff 100%);
+  background: -ms-linear-gradient(left, rgba(255, 255, 255, 0.1), #fff 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), #fff 100%);
 }
 .option:hover {
-  border-left: 5px solid white;
-  width: 98px;
+  border-left: 5px solid #929292;
+  width: 143px;
 }
 .option.--is-active {
-  border-right: 3px solid #ff9e54;
-  width: 98px;
+  border-right: 5px solid #929292;
+  width: 143px;
   cursor: default;
 }
 .option.--is-active:hover {
@@ -196,7 +197,7 @@ body {
 }
 @media (max-width: 960px) {
   .options {
-    top: 0;
+    top: 50px;
   }
   .info {
     padding: 0 1em 1em 0;
@@ -232,15 +233,15 @@ body {
     bottom: 50px;
   }
   .option {
-    margin-bottom: 1px;
+    margin-bottom: 10px;
     padding: 5px;
-    height: 45px;
-    width: 45px;
+    height: 36px;
+    width: 140px;
     display: flex;
   }
   .option.--is-active {
-    border-right: 2px solid red;
-    width: 47px;
+    border-right: 5px solid #929292;
+    width: 143px;
   }
   .option img {
     height: 100%;
