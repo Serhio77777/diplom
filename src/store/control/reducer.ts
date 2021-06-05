@@ -33,7 +33,7 @@ const initialState: IControlState = {
 		{
 			value: 'images/sofa.glb',
 			label: 'Sofa',
-			elements: [{ name: 'back' }, { name: 'back' }, { name: 'back_cushion' }, { name: 'seat' }, { name: 'seat_bottom' }, { name: 'sidewall' }],
+			elements: [{ name: 'back' }, { name: 'back_cushion' }, { name: 'seat' }, { name: 'seat_bottom' }, { name: 'sidewall' }],
 			rotate: -Math.PI / 2
 		}
 	],
