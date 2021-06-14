@@ -11,7 +11,7 @@ const Options = (props: any) => {
               onClick={props.selectOption}
               data-option={item.name}
             >
-              {item.name}
+              {(item.name as string).charAt(0).toUpperCase() + (item.name as string).replace('_', ' ').slice(1)}
             </div>
           )
         })
