@@ -57,7 +57,7 @@ const Furniture = (props: Props): React.ReactElement => {
     let activeOption = props.currentModel.elements[0];
     let loaded = false;
 
-    const BACKGROUND_COLOR = 0xC7BDBD;
+    const BACKGROUND_COLOR = 0x999999;
 
     const scene: any = new THREE.Scene();
   
@@ -171,7 +171,7 @@ const Furniture = (props: Props): React.ReactElement => {
     // Floor
     const floorGeometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
     const floorMaterial = new THREE.MeshPhongMaterial({
-      color: 0xe1d7d7,
+      color: 0xcccccc,
       shininess: 0
     });
 
