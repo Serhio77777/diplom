@@ -75,7 +75,7 @@ export const setMaterial = (parent: any, type: any, mtl: any) => {
 
 export const colors = [
   {
-    texture: 'images/_wood.jpg',
+    texture: 'images/wood_.jpg',
     size: [2,2,2],
     shininess: 60
   },
